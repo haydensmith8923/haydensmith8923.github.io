@@ -1,0 +1,578 @@
+---
+const spots = [
+	{
+		id: 'chair',
+		href: '/about',
+		label: 'About Me',
+		sub: 'Where it started',
+		style: 'left:16%; bottom:16%; width:74px;',
+	},
+	{
+		id: 'notebook',
+		href: '/journal',
+		label: 'My Journal',
+		sub: 'Notes in progress',
+		style: 'left:23.5%; bottom:12.5%; width:40px;',
+	},
+	{
+		id: 'suitcase',
+		href: '/investment-banking',
+		label: 'Investment Banking',
+		sub: 'Where I want to go next',
+		style: 'left:28%; bottom:9%; width:48px;',
+	},
+	{
+		id: 'surfboard',
+		href: '/experience',
+		label: 'Experience',
+		sub: 'What I’ve done so far',
+		style: 'left:41%; bottom:11%; width:34px;',
+	},
+	{
+		id: 'tower',
+		href: '/leadership',
+		label: 'Leadership',
+		sub: 'Execution under pressure',
+		style: 'right:14%; bottom:15%; width:60px;',
+	},
+];
+
+const ICONS: Record<string, string> = {
+	chair: `<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 34 L20 10 M20 10 L48 10 M12 34 L44 34 M44 34 L48 10"/><path d="M12 34 L8 52 M44 34 L48 52"/><path d="M8 52 L52 52"/><path d="M20 16 L42 16 M18 22 L43 22 M17 28 L44 28"/></svg>`,
+	notebook: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="24" height="30" rx="1.5"/><path d="M14 14 L26 14 M14 20 L26 20 M14 26 L22 26"/><path d="M27 8 L34 33"/></svg>`,
+	suitcase: `<svg viewBox="0 0 48 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="13" width="38" height="24" rx="2.5"/><path d="M18 13 V8 a3 3 0 0 1 3-3 h6 a3 3 0 0 1 3 3 v5"/><path d="M5 24 H43"/></svg>`,
+	surfboard: `<svg viewBox="0 0 30 90" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3 C 24 20 26 55 15 87 C 4 55 6 20 15 3 Z"/><path d="M15 12 V78"/></svg>`,
+	tower: `<svg viewBox="0 0 60 90" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 88 L22 34 M50 88 L38 34"/><path d="M14 70 L46 70 M18 52 L42 52"/><rect x="16" y="14" width="28" height="22" rx="1.5"/><path d="M16 22 H44"/></svg>`,
+};
+---
+
+<section class="scene" data-scene aria-label="Interactive beach scene — explore the site through objects on the shore">
+	<div class="sky" aria-hidden="true">
+		<div class="sun"></div>
+		<div class="cloud cloud-a"></div>
+		<div class="cloud cloud-b"></div>
+	</div>
+
+	<div class="ocean" aria-hidden="true">
+		<div class="glimmer"></div>
+		<svg class="waves" viewBox="0 0 1200 120" preserveAspectRatio="none">
+			<path d="M0 40 Q 150 20 300 40 T 600 40 T 900 40 T 1200 40 V120 H0 Z" opacity="0.5" />
+			<path d="M0 60 Q 150 45 300 60 T 600 60 T 900 60 T 1200 60 V120 H0 Z" opacity="0.35" />
+		</svg>
+	</div>
+
+	<button
+		class="hotspot ocean-hotspot"
+		data-hotspot
+		data-href="/research"
+		aria-label="Investment Research — finding what the market may be missing"
+	>
+		<span class="tooltip">
+			<strong>Investment Research</strong>
+			<em>Finding what the market may be missing</em>
+			<span class="open">Open &rarr;</span>
+		</span>
+	</button>
+
+	<div class="sand" aria-hidden="true">
+		<svg class="footprints" viewBox="0 0 400 120" preserveAspectRatio="none" data-footprints>
+			<g fill="currentColor" opacity="0.35">
+				<ellipse cx="40" cy="14" rx="4" ry="7" />
+				<ellipse cx="58" cy="30" rx="4" ry="7" />
+				<ellipse cx="76" cy="46" rx="4" ry="7" />
+				<ellipse cx="94" cy="62" rx="4" ry="7" />
+				<ellipse cx="112" cy="78" rx="4" ry="7" />
+				<ellipse cx="130" cy="94" rx="4" ry="7" />
+			</g>
+		</svg>
+
+		<button class="easter shell" data-easter="shell" aria-label="A shell on the sand" style="left:63%; bottom:6%;">
+			<svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3c4 2 7 6 7 11a7 7 0 0 1-14 0c0-5 3-9 7-11Z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M12 7v10M9 10l3-2 3 2M8.5 14l3.5-2 3.5 2" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+		</button>
+	</div>
+
+	{
+		spots.map((s) => (
+			<a
+				class={`hotspot object object-${s.id}`}
+				data-hotspot
+				href={s.href}
+				style={s.style}
+				aria-label={`${s.label} — ${s.sub}`}
+			>
+				<Fragment set:html={ICONS[s.id]} />
+				<span class="tooltip">
+					<strong>{s.label}</strong>
+					<em>{s.sub}</em>
+					<span class="open">Open &rarr;</span>
+				</span>
+			</a>
+		))
+	}
+
+	<button class="easter sun-easter" data-easter="sun" aria-label="The sunset">
+		<span class="sr-only">A quiet moment</span>
+	</button>
+
+	<div class="hero-copy">
+		<p class="kicker">From the Gulf Coast to Wall Street</p>
+		<h1>HAYDEN SMITH</h1>
+		<p class="sub">Carnegie Mellon University &middot; Business Administration</p>
+		<p class="tag">From Florida to finance.</p>
+		<p class="hint" data-hint>Explore the shore to begin.</p>
+	</div>
+
+	<div class="easter-popover" data-easter-popover hidden>
+		<button class="close" data-easter-close aria-label="Close">&times;</button>
+		<p data-easter-text></p>
+	</div>
+</section>
+
+<script define:vars={{
+	shellText: "I'm a twin — there's always been two of us telling this story.",
+	sunText: "“Good days and bad days can happen simultaneously. Show up for both.”",
+}}>
+	const scene = document.querySelector('[data-scene]');
+	const popover = document.querySelector('[data-easter-popover]');
+	const popoverText = document.querySelector('[data-easter-text]');
+	const closeBtn = document.querySelector('[data-easter-close]');
+	const hint = document.querySelector('[data-hint]');
+
+	const texts = { shell: shellText, sun: sunText };
+
+	document.querySelectorAll('[data-easter]').forEach((el) => {
+		el.addEventListener('click', () => {
+			const key = el.getAttribute('data-easter');
+			if (!popover || !popoverText) return;
+			popoverText.textContent = texts[key] || '';
+			popover.hidden = false;
+		});
+	});
+
+	closeBtn?.addEventListener('click', () => {
+		if (popover) popover.hidden = true;
+	});
+
+	let hovered = false;
+	document.querySelectorAll('[data-hotspot]').forEach((el) => {
+		el.addEventListener('mouseenter', () => {
+			if (!hovered) {
+				hovered = true;
+				hint?.classList.add('is-hidden');
+			}
+		});
+	});
+</script>
+
+<style define:vars={{}}>
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+	}
+
+	.scene {
+		position: relative;
+		width: 100%;
+		height: 100svh;
+		min-height: 560px;
+		overflow: hidden;
+		background: var(--navy-deep);
+	}
+
+	.sky {
+		position: absolute;
+		inset: 0;
+		height: 64%;
+		background: linear-gradient(180deg, #0b1f33 0%, #1c3f57 42%, #4c6f7a 72%, #cf9a6c 100%);
+	}
+
+	.sun {
+		position: absolute;
+		left: 80%;
+		top: 63%;
+		width: 110px;
+		height: 110px;
+		border-radius: 50%;
+		background: radial-gradient(circle, #f2c68a 0%, #d98e5b 55%, rgba(217, 142, 91, 0) 75%);
+		filter: blur(1px);
+		transform: translate(-50%, -50%);
+	}
+
+	.cloud {
+		position: absolute;
+		height: 10px;
+		border-radius: 999px;
+		background: rgba(250, 247, 240, 0.14);
+		filter: blur(2px);
+		animation: drift 90s linear infinite;
+	}
+
+	.cloud-a {
+		width: 160px;
+		top: 18%;
+		left: -20%;
+	}
+
+	.cloud-b {
+		width: 110px;
+		top: 28%;
+		left: -40%;
+		animation-duration: 130s;
+		animation-delay: -30s;
+	}
+
+	@keyframes drift {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(160vw);
+		}
+	}
+
+	.ocean {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 64%;
+		height: 16%;
+		background: linear-gradient(180deg, #33586a 0%, #274a5c 60%, #1f3d4d 100%);
+		overflow: hidden;
+	}
+
+	.glimmer {
+		position: absolute;
+		left: 80%;
+		top: 0;
+		bottom: 0;
+		width: 90px;
+		background: linear-gradient(180deg, rgba(242, 198, 138, 0.55), rgba(242, 198, 138, 0));
+		transform: translateX(-50%) skewX(-6deg);
+		opacity: 0.7;
+	}
+
+	.waves {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		color: #cfe3e6;
+		fill: currentColor;
+		animation: wave-drift 14s ease-in-out infinite;
+	}
+
+	@keyframes wave-drift {
+		0%, 100% {
+			transform: translateX(0);
+		}
+		50% {
+			transform: translateX(-2%);
+		}
+	}
+
+	.ocean-hotspot {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 64%;
+		height: 16%;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.sand {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 80%;
+		bottom: 0;
+		background: linear-gradient(180deg, #dcc79f 0%, #cdb389 55%, #b99968 100%);
+	}
+
+	.footprints {
+		position: absolute;
+		left: 6%;
+		bottom: 0;
+		width: 28%;
+		height: 100%;
+		color: var(--wood);
+	}
+
+	.hotspot {
+		position: absolute;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		color: var(--off-white);
+		filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+		transition: transform 0.35s var(--ease), filter 0.35s var(--ease);
+		text-decoration: none;
+		z-index: 3;
+	}
+
+	.hotspot svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		overflow: visible;
+	}
+
+	.hotspot:hover,
+	.hotspot:focus-visible {
+		transform: translateY(-4px) scale(1.05);
+		filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35)) brightness(1.15);
+	}
+
+	.hotspot:focus-visible {
+		outline: 2px solid var(--sunset);
+		outline-offset: 4px;
+	}
+
+	.tooltip {
+		position: absolute;
+		left: 50%;
+		bottom: calc(100% + 14px);
+		transform: translate(-50%, 6px);
+		background: rgba(11, 31, 51, 0.92);
+		color: var(--off-white);
+		padding: 0.7rem 1rem;
+		min-width: 172px;
+		text-align: left;
+		font-family: var(--font-body);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.25s ease, transform 0.25s ease;
+		white-space: nowrap;
+	}
+
+	.tooltip strong {
+		display: block;
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		font-weight: 600;
+		margin-bottom: 0.15rem;
+	}
+
+	.tooltip em {
+		display: block;
+		font-style: normal;
+		font-size: 0.72rem;
+		color: var(--sand);
+		letter-spacing: 0.02em;
+	}
+
+	.tooltip .open {
+		display: block;
+		margin-top: 0.4rem;
+		font-size: 0.68rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--sunset);
+	}
+
+	.hotspot:hover .tooltip,
+	.hotspot:focus-visible .tooltip {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+
+	.ocean-hotspot .tooltip {
+		left: 50%;
+		bottom: auto;
+		top: 50%;
+		transform: translate(-50%, -40%);
+	}
+
+	.ocean-hotspot:hover .tooltip,
+	.ocean-hotspot:focus-visible .tooltip {
+		transform: translate(-50%, -50%);
+	}
+
+	.easter {
+		position: absolute;
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: rgba(23, 21, 18, 0.4);
+		z-index: 3;
+		min-width: 44px;
+		min-height: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.easter:hover {
+		color: var(--sunset-deep);
+	}
+
+	.sun-easter {
+		position: absolute;
+		left: 80%;
+		top: 63%;
+		width: 110px;
+		height: 110px;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		min-width: 0;
+		min-height: 0;
+	}
+
+	.hero-copy {
+		position: absolute;
+		left: 50%;
+		top: 40%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		color: var(--off-white);
+		z-index: 4;
+		width: 100%;
+		padding: 0 1.5rem;
+	}
+
+	.kicker {
+		text-transform: uppercase;
+		letter-spacing: 0.22em;
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: var(--sand);
+		margin: 0 0 1.1rem;
+	}
+
+	.hero-copy h1 {
+		font-size: clamp(2.4rem, 8vw, 5rem);
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		margin: 0 0 0.5rem;
+		text-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+	}
+
+	.sub {
+		font-size: clamp(0.95rem, 2vw, 1.15rem);
+		color: var(--off-white);
+		margin: 0 0 0.4rem;
+		font-weight: 500;
+	}
+
+	.tag {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: clamp(1rem, 2.2vw, 1.25rem);
+		color: var(--sand);
+		margin: 0;
+	}
+
+	.hint {
+		margin: 2.2rem 0 0;
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: rgba(250, 247, 240, 0.6);
+		transition: opacity 0.4s ease;
+	}
+
+	.hint.is-hidden {
+		opacity: 0;
+	}
+
+	.easter-popover {
+		position: absolute;
+		left: 50%;
+		bottom: 8%;
+		transform: translateX(-50%);
+		max-width: 360px;
+		background: var(--off-white);
+		color: var(--navy-deep);
+		padding: 1.2rem 1.4rem;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+		z-index: 10;
+	}
+
+	.easter-popover p {
+		margin: 0;
+		font-family: var(--font-display);
+		font-style: italic;
+		font-size: 1rem;
+		padding-right: 1.2rem;
+	}
+
+	.easter-popover .close {
+		position: absolute;
+		top: 0.4rem;
+		right: 0.6rem;
+		background: none;
+		border: none;
+		font-size: 1.2rem;
+		cursor: pointer;
+		color: var(--navy-deep);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.cloud,
+		.waves {
+			animation: none;
+		}
+	}
+
+	@media (max-width: 780px) {
+		.scene {
+			height: auto;
+			min-height: 0;
+			padding-bottom: 2.5rem;
+		}
+
+		.sky {
+			position: relative;
+			height: 46vh;
+			min-height: 280px;
+		}
+
+		.ocean,
+		.ocean-hotspot,
+		.sand {
+			position: relative;
+			top: auto;
+			height: auto;
+		}
+
+		.ocean {
+			height: 12vh;
+			min-height: 70px;
+		}
+
+		.ocean-hotspot {
+			display: none;
+		}
+
+		.sand {
+			height: 8vh;
+			min-height: 60px;
+		}
+
+		.hotspot.object,
+		.footprints,
+		.easter,
+		.sun-easter {
+			display: none;
+		}
+
+		.hero-copy {
+			position: relative;
+			left: auto;
+			top: auto;
+			transform: none;
+			width: auto;
+			padding: 2rem 1.5rem 0.5rem;
+		}
+
+		.hint {
+			display: none;
+		}
+	}
+</style>

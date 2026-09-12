@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('journal');
+all.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="The Journal — Hayden Smith" description="Notes on investing, research, and learning investment banking.">
+	<section class="wrap-wide intro">
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">The Journal</p>
+		<h1>Notes in progress.</h1>
+		<p class="lede">Short entries on investment ideas, lessons from stock pitches, and what I'm learning about the recruiting process. Updated as I go.</p>
+	</section>
+
+	<section class="wrap-wide entries">
+		{
+			all.map((entry) => (
+				<article class="entry">
+					<p class="tag">{entry.data.tag}</p>
+					<h2>{entry.data.title}</h2>
+					<p class="excerpt">{entry.data.excerpt}</p>
+					<a class="read-more" href={`/journal/${entry.id}`}>Read more &rarr;</a>
+				</article>
+			))
+		}
+	</section>
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 1rem 2rem;
+	}
+
+	.eyebrow {
+		margin: 1.5rem 0 1rem;
+	}
+
+	.lede {
+		font-size: 1.05rem;
+		color: color-mix(in srgb, var(--ink) 80%, transparent);
+		max-width: 52ch;
+	}
+
+	.entries {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
+		padding-block: 1rem 3rem;
+	}
+
+	.entry {
+		background: var(--off-white);
+		padding: 1.8rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tag {
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.7rem;
+		font-weight: 700;
+		color: var(--ocean);
+		margin: 0 0 0.6rem;
+	}
+
+	.entry h2 {
+		font-size: 1.25rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.excerpt {
+		font-size: 0.92rem;
+		color: color-mix(in srgb, var(--ink) 78%, transparent);
+		flex-grow: 1;
+	}
+
+	.read-more {
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--sunset-deep);
+		text-decoration: none;
+	}
+</style>

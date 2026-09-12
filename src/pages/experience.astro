@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('experience');
+all.sort((a, b) => a.data.order - b.data.order);
+const finance = all.filter((e) => e.data.category === 'finance');
+const other = all.filter((e) => e.data.category === 'other');
+---
+
+<BaseLayout title="Experience — Hayden Smith" description="Professional experience, finance-first.">
+	<section class="wrap-wide intro">
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">Experience</p>
+		<h1>What I've done so far</h1>
+		<p class="lede">An analyst profile, not a résumé dump — finance work first, everything else after.</p>
+	</section>
+
+	<section class="wrap-wide block">
+		<h2 class="group-title">Finance</h2>
+		<div class="cards">
+			{
+				finance.map((job) => (
+					<article class="card">
+						{job.data.placeholder && <span class="badge">Add real details</span>}
+						<div class="card-head">
+							<span class="role">{job.data.role}</span>
+							<span class="dates">{job.data.dates}</span>
+						</div>
+						<p class="org">{job.data.org}</p>
+						<ul>
+							{job.data.bullets.map((b) => <li>{b}</li>)}
+						</ul>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	{
+		other.length > 0 && (
+			<section class="wrap-wide block">
+				<h2 class="group-title">Also worth knowing</h2>
+				<div class="cards">
+					{other.map((job) => (
+						<article class="card">
+							{job.data.placeholder && <span class="badge">Add real details</span>}
+							<div class="card-head">
+								<span class="role">{job.data.role}</span>
+								<span class="dates">{job.data.dates}</span>
+							</div>
+							<p class="org">{job.data.org}</p>
+							<ul>
+								{job.data.bullets.map((b) => <li>{b}</li>)}
+							</ul>
+						</article>
+					))}
+				</div>
+			</section>
+		)
+	}
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 1rem 2rem;
+	}
+
+	.eyebrow {
+		margin: 1.5rem 0 1rem;
+	}
+
+	.lede {
+		font-size: 1.1rem;
+		color: color-mix(in srgb, var(--ink) 82%, transparent);
+		max-width: 50ch;
+	}
+
+	.block {
+		padding-block: 2rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.group-title {
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-family: var(--font-body);
+		font-weight: 700;
+		color: var(--ocean);
+		margin-bottom: 1.5rem;
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.card {
+		border: 1px solid var(--line);
+		padding: 1.6rem;
+		position: relative;
+		background: var(--off-white);
+	}
+
+	.badge {
+		display: inline-block;
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--sunset-deep);
+		border: 1px solid var(--sunset);
+		padding: 0.2em 0.5em;
+		margin-bottom: 1rem;
+	}
+
+	.card-head {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.role {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.2rem;
+	}
+
+	.dates {
+		font-size: 0.8rem;
+		color: var(--ocean);
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.org {
+		margin: 0.2em 0 0.9em;
+		font-weight: 500;
+		color: color-mix(in srgb, var(--ink) 70%, transparent);
+	}
+
+	ul {
+		margin: 0;
+		padding-left: 1.1rem;
+	}
+
+	li {
+		margin-bottom: 0.4em;
+		font-size: 0.95rem;
+	}
+</style>

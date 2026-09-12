@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+const all = await getCollection('leadership');
+all.sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(all.map(async (e) => ({ entry: e, Content: (await render(e)).Content })));
+---
+
+<BaseLayout title="Leadership — Hayden Smith" description="Execution, coordination, and responsibility under pressure.">
+	<section class="wrap-wide intro">
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">Leadership</p>
+		<h1>Execution under pressure</h1>
+	</section>
+
+	{
+		rendered.map(({ entry, Content }) => (
+			<section class:list={['case wrap-wide', { featured: entry.data.featured }]}>
+				<div class="case-head">
+					<p class="dates">{entry.data.org} &middot; {entry.data.dates}</p>
+					<h2>{entry.data.title}</h2>
+				</div>
+
+				{entry.data.stats.length > 0 && (
+					<div class="stats">
+						{entry.data.stats.map((s) => (
+							<div class="stat-block">
+								<span class="value">{s.value}</span>
+								<span class="label">{s.label}</span>
+							</div>
+						))}
+					</div>
+				)}
+
+				<div class="case-body">
+					<Content />
+				</div>
+			</section>
+		))
+	}
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 1rem 2rem;
+	}
+
+	.eyebrow {
+		margin: 1.5rem 0 1rem;
+	}
+
+	.case {
+		padding-block: 2.5rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.case-head h2 {
+		max-width: 20ch;
+	}
+
+	.dates {
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--ocean);
+		margin: 0 0 0.6rem;
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0 2.5rem;
+		padding: 1.5rem 0;
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.stat-block {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.stat-block .value {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: clamp(1.8rem, 4vw, 2.6rem);
+		color: var(--sunset-deep);
+		line-height: 1;
+	}
+
+	.stat-block .label {
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ocean);
+		margin-top: 0.4rem;
+	}
+
+	.case-body {
+		max-width: 62ch;
+		font-size: 1.05rem;
+	}
+</style>

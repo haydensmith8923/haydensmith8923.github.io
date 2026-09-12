@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const all = await getCollection('research');
+	return all.map((entry) => ({
+		params: {
+			slug: entry.data.company
+				.toLowerCase()
+				.replace(/[^a-z0-9]+/g, '-')
+				.replace(/(^-|-$)/g, ''),
+		},
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+---
+
+<BaseLayout title={`${d.company} (${d.ticker}) — Research — Hayden Smith`} description={d.question}>
+	<article class="memo wrap">
+		<a class="back-link" href="/research">&larr; Back to research</a>
+
+		{d.placeholder && (
+			<p class="placeholder-notice">This case study contains placeholder fields — replace them with the real report.</p>
+		)}
+
+		<header class="memo-head">
+			<p class="eyebrow">Investment Memo</p>
+			<h1>{d.company}</h1>
+			<div class="tags">
+				<span class="ticker">{d.ticker}</span>
+				<span class="position" data-position={d.position}>{d.position}</span>
+				{d.upside !== null && (
+					<span class="upside">
+						<strong>{d.upside}%</strong> implied upside
+					</span>
+				)}
+			</div>
+		</header>
+
+		<section class="memo-section">
+			<p class="label">The Question</p>
+			<p class="big">{d.question}</p>
+		</section>
+
+		<section class="memo-section">
+			<p class="label">Thesis</p>
+			<p>{d.thesis}</p>
+		</section>
+
+		{d.whyNow.length > 0 && (
+			<section class="memo-section">
+				<p class="label">Why Now</p>
+				<ul>
+					{d.whyNow.map((c) => <li>{c}</li>)}
+				</ul>
+			</section>
+		)}
+
+		<section class="memo-section">
+			<p class="label">Valuation</p>
+			<p>{d.valuation}</p>
+		</section>
+
+		<section class="memo-section scenarios">
+			<p class="label">Bull / Base / Bear</p>
+			<div class="scenario-grid">
+				<div class="scenario bull">
+					<span class="scenario-label">Bull</span>
+					<p>{d.bull}</p>
+				</div>
+				<div class="scenario base">
+					<span class="scenario-label">Base</span>
+					<p>{d.base}</p>
+				</div>
+				<div class="scenario bear">
+					<span class="scenario-label">Bear</span>
+					<p>{d.bear}</p>
+				</div>
+			</div>
+		</section>
+
+		{d.risks.length > 0 && (
+			<section class="memo-section">
+				<p class="label">Risks</p>
+				<ul>
+					{d.risks.map((r) => <li>{r}</li>)}
+				</ul>
+			</section>
+		)}
+
+		<section class="memo-section conclusion">
+			<p class="label">Conclusion</p>
+			<p class="big">{d.conclusion}</p>
+		</section>
+	</article>
+</BaseLayout>
+
+<style>
+	.memo {
+		padding-block: 1rem 3rem;
+	}
+
+	.placeholder-notice {
+		margin: 1.5rem 0 0;
+		font-size: 0.85rem;
+		color: var(--sunset-deep);
+		border: 1px solid var(--sunset);
+		padding: 0.7em 1em;
+		display: inline-block;
+	}
+
+	.memo-head {
+		padding-block: 1.5rem 2rem;
+		border-bottom: 1px solid var(--line);
+		margin-bottom: 2rem;
+	}
+
+	.eyebrow {
+		margin-bottom: 1rem;
+	}
+
+	.memo-head h1 {
+		margin-bottom: 1rem;
+	}
+
+	.tags {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.ticker {
+		font-family: var(--font-body);
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		color: var(--ocean);
+	}
+
+	.position {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		padding: 0.25em 0.7em;
+		color: var(--off-white);
+		background: var(--ocean);
+	}
+
+	.position[data-position='SHORT'] {
+		background: var(--sunset-deep);
+	}
+
+	.upside strong {
+		font-family: var(--font-display);
+		font-size: 1.3rem;
+		color: var(--sunset-deep);
+	}
+
+	.memo-section {
+		padding-block: 1.6rem;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.memo-section:last-child {
+		border-bottom: none;
+	}
+
+	.label {
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--ocean);
+		margin: 0 0 0.8rem;
+	}
+
+	.big {
+		font-family: var(--font-display);
+		font-size: 1.3rem;
+		font-weight: 500;
+		margin: 0;
+	}
+
+	ul {
+		margin: 0;
+		padding-left: 1.2rem;
+	}
+
+	li {
+		margin-bottom: 0.5em;
+	}
+
+	.scenario-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: 1.2rem;
+	}
+
+	.scenario {
+		padding: 1.2rem;
+		border: 1px solid var(--line);
+	}
+
+	.scenario-label {
+		display: block;
+		font-family: var(--font-display);
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.scenario.bull .scenario-label {
+		color: var(--ocean);
+	}
+
+	.scenario.bear .scenario-label {
+		color: var(--sunset-deep);
+	}
+
+	.scenario p {
+		margin: 0;
+		font-size: 0.92rem;
+	}
+
+	.conclusion .big {
+		color: var(--navy-deep);
+	}
+</style>

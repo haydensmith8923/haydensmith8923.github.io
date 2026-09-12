@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+const all = await getCollection('research');
+all.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Investment Research — Hayden Smith" description="Finding what the market may be missing.">
+	<section class="wrap-wide intro">
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">Investment Research</p>
+		<h1>Finding what the market may be missing.</h1>
+	</section>
+
+	<section class="wrap-wide grid">
+		{
+			all.map((r) => (
+				<a class="card" href={`/research/${slugify(r.data.company)}`}>
+					{r.data.placeholder && <span class="badge">Add real report detail</span>}
+					<p class="ticker">{r.data.company} &middot; {r.data.ticker}</p>
+					<p class="position" data-position={r.data.position}>{r.data.position}</p>
+					{r.data.upside !== null && (
+						<p class="upside">
+							<span class="num">{r.data.upside}%</span>
+							<span class="label">Implied Upside</span>
+						</p>
+					)}
+					<span class="open">Read the case study &rarr;</span>
+				</a>
+			))
+		}
+	</section>
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 1rem 2rem;
+	}
+
+	.eyebrow {
+		margin: 1.5rem 0 1rem;
+	}
+
+	h1 {
+		max-width: 22ch;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+		padding-block: 1rem 3rem;
+	}
+
+	.card {
+		border: 1px solid var(--line);
+		padding: 2rem;
+		text-decoration: none;
+		color: var(--navy-deep);
+		position: relative;
+		background: var(--off-white);
+		transition: border-color 0.25s ease, transform 0.25s var(--ease);
+	}
+
+	.card:hover {
+		border-color: var(--ocean);
+		transform: translateY(-3px);
+	}
+
+	.badge {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--sunset-deep);
+		border: 1px solid var(--sunset);
+		padding: 0.2em 0.5em;
+	}
+
+	.ticker {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.3rem;
+		margin: 0 0 0.4rem;
+	}
+
+	.position {
+		display: inline-block;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		padding: 0.2em 0.6em;
+		margin: 0 0 1.2rem;
+		color: var(--off-white);
+		background: var(--ocean);
+	}
+
+	.position[data-position='SHORT'] {
+		background: var(--sunset-deep);
+	}
+
+	.upside {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin: 0 0 1.4rem;
+	}
+
+	.upside .num {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 2.4rem;
+		color: var(--sunset-deep);
+	}
+
+	.upside .label {
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ocean);
+	}
+
+	.open {
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--ocean);
+	}
+
+	.card:hover .open {
+		color: var(--sunset-deep);
+	}
+</style>

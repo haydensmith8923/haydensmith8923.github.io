@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Investment Banking — Hayden Smith" description="Where I want to go next.">
+	<section class="wrap intro">
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">Investment Banking</p>
+		<h1>Where I want to go next.</h1>
+	</section>
+
+	<section class="wrap body">
+		<p class="big">
+			Research taught me to ask whether the market has mispriced something. Investment banking is where that question gets attached to a deal, a client, and a deadline — where the analysis has to hold up not in a classroom, but in a room with people who've done this a hundred times.
+		</p>
+
+		<p>
+			I like the parts of finance that don't have a clean answer yet: building a model that has to survive someone poking every assumption, figuring out what a business is actually worth when the comps don't quite fit, working fast enough that the analysis is still relevant by the time it's needed. Coordinating a 15-person team against a fixed deadline for Greek Sing and defending a DCF for a stock pitch turned out to be the same muscle — hold the standard high, move fast anyway, and be honest about what you don't know yet.
+		</p>
+
+		<p>
+			What I want out of investment banking specifically is exposure to real transactions and the teams that execute them — the chance to learn the mechanics of a deal from people who are exceptional at it, in an environment where the bar is high enough that coasting isn't an option. I'd rather be the least experienced person in a room that's actually doing the work than the most experienced person in a room that isn't.
+		</p>
+
+		<p class="placeholder">
+			[Add specifics here: which groups/product areas interest you and why, any deals or transactions you've followed closely, and what from your recruiting conversations has sharpened this.]
+		</p>
+	</section>
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 1rem 2rem;
+	}
+
+	.eyebrow {
+		margin: 1.5rem 0 1rem;
+	}
+
+	.body {
+		padding-block: 1rem 2rem;
+	}
+
+	.big {
+		font-family: var(--font-display);
+		font-size: 1.4rem;
+		font-weight: 500;
+		max-width: 42ch;
+		margin-bottom: 1.5rem;
+	}
+
+	.body p:not(.big) {
+		font-size: 1.05rem;
+		max-width: 60ch;
+	}
+
+	.placeholder {
+		color: var(--sunset-deep);
+		border-left: 2px solid var(--sunset);
+		padding-left: 1rem;
+		font-size: 0.95rem;
+	}
+</style>

@@ -3,11 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Timeline from '../components/Timeline.astro';
 ---
 
-<BaseLayout title="About" description="How I got here — the personal story.">
+<BaseLayout title="About — Hayden Smith" description="Florida background, Carnegie Mellon, and the path toward investment banking.">
 	<section class="wrap intro">
-		<p class="eyebrow">About</p>
-		<h1>How I got here</h1>
-		<p class="sub">The short version is on this page. The long version is still being written — scroll for the milestones that actually mattered.</p>
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">About Me</p>
+		<h1>Where it started</h1>
+		<p class="lede">
+			I grew up in Florida — a twin, working since 14, in a family without much financial cushion. I studied Business Administration at Carnegie Mellon, where a general interest in numbers turned into a specific one: finding mispriced situations before the market catches up. That's the thread running from a beach town to a research desk, and it's what's pulling me toward investment banking now.
+		</p>
 	</section>
 
 	<section class="wrap">
@@ -17,21 +20,16 @@ import Timeline from '../components/Timeline.astro';
 
 <style>
 	.intro {
-		padding-block: 2rem 2.5rem;
+		padding-block: 1rem 2.5rem;
 	}
 
 	.eyebrow {
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		font-size: 0.8rem;
-		font-weight: 600;
-		color: var(--moss);
-		margin-bottom: 1rem;
+		margin: 1.5rem 0 1rem;
 	}
 
-	.sub {
+	.lede {
 		font-size: 1.1rem;
-		color: color-mix(in srgb, var(--ink) 80%, transparent);
-		max-width: 42ch;
+		color: color-mix(in srgb, var(--ink) 82%, transparent);
+		max-width: 56ch;
 	}
 </style>

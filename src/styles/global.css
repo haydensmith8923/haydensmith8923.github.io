@@ -1,18 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-	--ink: #201c1a;
-	--paper: #f6f0e4;
-	--paper-dim: #ece3d1;
-	--rust: #c1502e;
-	--rust-dark: #8f3a20;
-	--moss: #4b6a52;
-	--line: #d8cbae;
+	/* coastal luxury palette */
+	--navy-deep: #0b1f33;
+	--navy: #17324a;
+	--ocean: #2e5c73;
+	--ocean-light: #7ea3b0;
+	--sand: #efe3ce;
+	--sand-dark: #d9c7a3;
+	--off-white: #faf7f0;
+	--sunset: #d98e5b;
+	--sunset-deep: #a85a35;
+	--wood: #6b4a34;
+	--ink: #171512;
+	--line: rgba(23, 21, 18, 0.12);
+	--line-on-dark: rgba(250, 247, 240, 0.18);
 
-	--font-display: 'Fraunces', Georgia, serif;
-	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
+	--font-display: 'Playfair Display', Georgia, serif;
+	--font-body: 'Inter', system-ui, sans-serif;
 
 	--max-w: 46rem;
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
 	color-scheme: light;
 }
 
@@ -24,30 +32,42 @@ html {
 	scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
 body {
 	margin: 0;
-	background: var(--paper);
+	background: var(--off-white);
 	color: var(--ink);
 	font-family: var(--font-body);
-	line-height: 1.6;
+	line-height: 1.65;
 	-webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3 {
 	font-family: var(--font-display);
-	line-height: 1.05;
+	line-height: 1.08;
 	margin: 0 0 0.4em;
 	letter-spacing: -0.01em;
+	font-weight: 600;
 }
 
 h1 {
-	font-size: clamp(2.6rem, 6vw, 4.6rem);
-	font-weight: 900;
+	font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+	font-weight: 700;
 }
 
 h2 {
-	font-size: clamp(1.8rem, 4vw, 2.6rem);
-	font-weight: 600;
+	font-size: clamp(1.7rem, 3.6vw, 2.4rem);
 }
 
 p {
@@ -58,6 +78,25 @@ a {
 	color: inherit;
 }
 
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6em;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	font-size: 0.72rem;
+	font-weight: 600;
+	color: var(--ocean);
+}
+
+.eyebrow::before {
+	content: '';
+	width: 1.4em;
+	height: 1px;
+	background: currentColor;
+	opacity: 0.6;
+}
+
 .wrap {
 	max-width: var(--max-w);
 	margin: 0 auto;
@@ -65,14 +104,20 @@ a {
 }
 
 .wrap-wide {
-	max-width: 64rem;
+	max-width: 68rem;
 	margin: 0 auto;
 	padding: 0 1.5rem;
 }
 
+.stat {
+	font-family: var(--font-display);
+	font-weight: 700;
+	color: var(--sunset-deep);
+}
+
 mark {
 	background: none;
-	color: var(--rust-dark);
+	color: var(--sunset-deep);
 	font-weight: 600;
 	position: relative;
 	padding: 0 0.05em;
@@ -84,12 +129,12 @@ mark::after {
 	left: -1%;
 	right: -1%;
 	bottom: 0.05em;
-	height: 0.32em;
-	background: color-mix(in srgb, var(--rust) 35%, transparent);
+	height: 0.3em;
+	background: color-mix(in srgb, var(--sunset) 30%, transparent);
 	z-index: -1;
 	transform: scaleX(0);
 	transform-origin: left;
-	transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	transition: transform 0.6s var(--ease);
 }
 
 mark.is-visible::after {
@@ -97,10 +142,59 @@ mark.is-visible::after {
 }
 
 ::selection {
-	background: var(--rust);
-	color: var(--paper);
+	background: var(--sunset);
+	color: var(--off-white);
 }
 
 button {
 	font-family: inherit;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-decoration: none;
+	color: var(--navy-deep);
+	border: 1px solid var(--line);
+	padding: 0.75em 1.3em;
+	transition: border-color 0.25s ease, transform 0.25s var(--ease), background 0.25s ease;
+	background: transparent;
+}
+
+.btn:hover {
+	border-color: var(--ocean);
+	transform: translateY(-2px);
+}
+
+.btn-solid {
+	background: var(--navy-deep);
+	color: var(--off-white);
+	border-color: var(--navy-deep);
+}
+
+.btn-solid:hover {
+	background: var(--navy);
+	border-color: var(--navy);
+}
+
+.back-link {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	font-size: 0.82rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--ocean);
+	width: fit-content;
+	margin-bottom: 1.2rem;
+}
+
+.back-link:hover {
+	color: var(--sunset-deep);
 }

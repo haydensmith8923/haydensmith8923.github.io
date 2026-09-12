@@ -1,14 +1,24 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
+import Connect from '../components/Connect.astro';
 import '../styles/global.css';
 
 interface Props {
 	title: string;
 	description?: string;
+	fullBleed?: boolean;
+	transparentNav?: boolean;
+	showConnect?: boolean;
 }
 
-const { title, description = 'Personal site of Hayden Smith.' } = Astro.props;
+const {
+	title,
+	description = 'Hayden Smith — from the Gulf Coast to Wall Street.',
+	fullBleed = false,
+	transparentNav = false,
+	showConnect = true,
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -18,17 +28,18 @@ const { title, description = 'Personal site of Hayden Smith.' } = Astro.props;
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} · Hayden Smith</title>
+		<title>{title}</title>
 		<ClientRouter />
 	</head>
 	<body>
-		<Nav />
-		<main>
+		<Nav transparent={transparentNav} />
+		<main class:list={{ 'full-bleed': fullBleed }}>
 			<slot />
 		</main>
+		{showConnect && <Connect />}
 		<footer>
-			<div class="wrap">
-				<p>Built by hand, not a template. &copy; {new Date().getFullYear()} Hayden Smith.</p>
+			<div class="wrap-wide">
+				<p>&copy; {new Date().getFullYear()} Hayden Smith.</p>
 			</div>
 		</footer>
 	</body>
@@ -36,15 +47,20 @@ const { title, description = 'Personal site of Hayden Smith.' } = Astro.props;
 
 <style>
 	main {
-		min-height: 70vh;
-		padding-block: 3rem 5rem;
+		min-height: 60vh;
+		padding-block: 3.5rem 2rem;
+	}
+
+	main.full-bleed {
+		padding: 0;
+		min-height: 0;
 	}
 
 	footer {
 		border-top: 1px solid var(--line);
 		padding-block: 1.5rem;
-		font-size: 0.85rem;
-		color: color-mix(in srgb, var(--ink) 60%, transparent);
+		font-size: 0.78rem;
+		color: color-mix(in srgb, var(--ink) 55%, transparent);
 	}
 
 	footer p {

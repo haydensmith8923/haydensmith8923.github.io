@@ -1,99 +1,134 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BeachScene from '../components/BeachScene.astro';
 
-const quickLinks = [
-	{ href: '/about', label: 'About', desc: 'Twin. Working since 14. Now at CMU.' },
-	{ href: '/professional', label: 'Professional', desc: 'Experience, skills, projects.' },
-	{ href: '/fun', label: 'Fun', desc: 'Movie takes and the teams I yell at.' },
-	{ href: '/contact', label: 'Contact', desc: "Get in touch, I don't bite." },
+const directory = [
+	{ href: '/about', label: 'About Me', sub: 'Where it started' },
+	{ href: '/experience', label: 'Experience', sub: 'What I’ve done so far' },
+	{ href: '/leadership', label: 'Leadership', sub: 'Execution under pressure' },
+	{ href: '/research', label: 'Investment Research', sub: 'Finding what the market may be missing' },
+	{ href: '/investment-banking', label: 'Investment Banking', sub: 'Where I want to go next' },
+	{ href: '/journal', label: 'The Journal', sub: 'Notes in progress' },
 ];
 ---
 
-<BaseLayout title="Home">
-	<section class="hero wrap">
-		<p class="eyebrow">Hayden Smith</p>
-		<h1>I'm a twin who started working at 14 &mdash; now I'm at CMU figuring out what's next.</h1>
-		<p class="sub">This is the site version of that story, plus what I actually do for work, and the stuff I care about when I'm not working at all.</p>
+<BaseLayout
+	title="From the Gulf Coast to Wall Street"
+	description="Hayden Smith — Carnegie Mellon University, Business Administration. From Florida to finance."
+	fullBleed
+	transparentNav
+	showConnect={false}
+>
+	<BeachScene />
+
+	<section class="directory wrap-wide">
+		<p class="eyebrow">Find your way in</p>
+		<h2>Every object on the shore is a door.</h2>
+		<div class="grid">
+			{
+				directory.map((d) => (
+					<a class="card" href={d.href}>
+						<span class="card-label">{d.label}</span>
+						<span class="card-sub">{d.sub}</span>
+						<span class="arrow" aria-hidden="true">&rarr;</span>
+					</a>
+				))
+			}
+		</div>
 	</section>
 
-	<section class="links wrap-wide">
-		{
-			quickLinks.map((link) => (
-				<a class="card" href={link.href}>
-					<span class="card-label">{link.label}</span>
-					<span class="card-desc">{link.desc}</span>
-					<span class="card-arrow" aria-hidden="true">&rarr;</span>
-				</a>
-			))
-		}
+	<section class="footer-connect wrap-wide">
+		<p class="eyebrow">Connect</p>
+		<ul>
+			<li><a href="#" target="_blank" rel="noopener">LinkedIn <span>[Add URL]</span> &rarr;</a></li>
+			<li><a href="#" target="_blank" rel="noopener">Email <span>[Add email]</span> &rarr;</a></li>
+			<li><a href="/resume.pdf" target="_blank" rel="noopener">Résumé <span>View PDF</span> &rarr;</a></li>
+		</ul>
 	</section>
 </BaseLayout>
 
 <style>
-	.hero {
-		padding-block: 2rem 3.5rem;
+	.directory {
+		padding-block: 5rem 4rem;
+		background: var(--off-white);
 	}
 
-	.eyebrow {
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		font-size: 0.8rem;
-		font-weight: 600;
-		color: var(--moss);
-		margin-bottom: 1rem;
+	h2 {
+		max-width: 26ch;
+		margin-bottom: 2.5rem;
 	}
 
-	.sub {
-		font-size: 1.15rem;
-		max-width: 38ch;
-		color: color-mix(in srgb, var(--ink) 80%, transparent);
-	}
-
-	.links {
+	.grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-		gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
 	}
 
 	.card {
+		background: var(--off-white);
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
+		padding: 1.8rem;
 		text-decoration: none;
-		color: var(--ink);
-		background: var(--paper-dim);
-		border: 1px solid var(--line);
-		border-radius: 0;
-		padding: 1.4rem;
+		color: var(--navy-deep);
 		position: relative;
-		transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+		transition: background 0.25s ease;
 	}
 
 	.card:hover {
-		transform: translate(-4px, -4px);
-		border-color: var(--rust);
-	}
-
-	.card:hover .card-arrow {
-		transform: translateX(4px);
+		background: var(--sand);
 	}
 
 	.card-label {
 		font-family: var(--font-display);
 		font-weight: 600;
-		font-size: 1.3rem;
+		font-size: 1.25rem;
 	}
 
-	.card-desc {
-		font-size: 0.9rem;
-		color: color-mix(in srgb, var(--ink) 65%, transparent);
+	.card-sub {
+		font-size: 0.85rem;
+		color: var(--ocean);
 	}
 
-	.card-arrow {
+	.arrow {
 		position: absolute;
-		top: 1.4rem;
-		right: 1.4rem;
-		color: var(--rust);
+		top: 1.8rem;
+		right: 1.8rem;
+		color: var(--sunset);
 		transition: transform 0.25s ease;
+	}
+
+	.card:hover .arrow {
+		transform: translateX(4px);
+	}
+
+	.footer-connect {
+		padding-block: 3rem 4rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.footer-connect ul {
+		list-style: none;
+		padding: 0;
+		margin: 1.2rem 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+	}
+
+	.footer-connect a {
+		text-decoration: none;
+		color: var(--navy-deep);
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.footer-connect a span {
+		color: var(--ocean);
+		font-weight: 500;
+		margin-left: 0.3em;
 	}
 </style>

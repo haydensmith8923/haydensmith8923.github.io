@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const all = await getCollection('journal');
+	return all.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} — Journal — Hayden Smith`} description={entry.data.excerpt}>
+	<article class="wrap post">
+		<a class="back-link" href="/journal">&larr; Back to the journal</a>
+		<p class="tag">{entry.data.tag} &middot; {entry.data.date}</p>
+		<h1>{entry.data.title}</h1>
+		<div class="content">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>
+
+<style>
+	.post {
+		padding-block: 1rem 3rem;
+	}
+
+	.tag {
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--ocean);
+		margin: 1.5rem 0 0.8rem;
+	}
+
+	.content {
+		font-size: 1.05rem;
+		max-width: 60ch;
+		margin-top: 1.5rem;
+	}
+
+	.content :global(a) {
+		color: var(--sunset-deep);
+		font-weight: 600;
+	}
+</style>

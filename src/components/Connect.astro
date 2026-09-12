@@ -1,0 +1,63 @@
+---
+const links = [
+	{ label: 'LinkedIn', value: '[Add LinkedIn URL]', href: '#' },
+	{ label: 'Email', value: '[Add contact email]', href: '#' },
+	{ label: 'Résumé', value: 'View PDF', href: '/resume.pdf' },
+];
+---
+
+<section class="connect wrap-wide">
+	<p class="eyebrow">Connect</p>
+	<ul>
+		{
+			links.map((link) => (
+				<li>
+					<a href={link.href} target={link.href.startsWith('/') ? '_blank' : undefined} rel="noopener">
+						<span class="label">{link.label}</span>
+						<span class="value">{link.value} &rarr;</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<style>
+	.connect {
+		padding-block: 3rem 4rem;
+		border-top: 1px solid var(--line);
+		margin-top: 3rem;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 1.2rem 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2.5rem;
+	}
+
+	a {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		text-decoration: none;
+		color: var(--navy-deep);
+	}
+
+	.label {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.15rem;
+	}
+
+	.value {
+		font-size: 0.85rem;
+		color: var(--ocean);
+	}
+
+	a:hover .value {
+		color: var(--sunset-deep);
+	}
+</style>
