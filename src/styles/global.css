@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root {
+	--ink: #201c1a;
+	--paper: #f6f0e4;
+	--paper-dim: #ece3d1;
+	--rust: #c1502e;
+	--rust-dark: #8f3a20;
+	--moss: #4b6a52;
+	--line: #d8cbae;
+
+	--font-display: 'Fraunces', Georgia, serif;
+	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
+
+	--max-w: 46rem;
+	color-scheme: light;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-body);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+	font-family: var(--font-display);
+	line-height: 1.05;
+	margin: 0 0 0.4em;
+	letter-spacing: -0.01em;
+}
+
+h1 {
+	font-size: clamp(2.6rem, 6vw, 4.6rem);
+	font-weight: 900;
+}
+
+h2 {
+	font-size: clamp(1.8rem, 4vw, 2.6rem);
+	font-weight: 600;
+}
+
+p {
+	margin: 0 0 1.1em;
+}
+
+a {
+	color: inherit;
+}
+
+.wrap {
+	max-width: var(--max-w);
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+.wrap-wide {
+	max-width: 64rem;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+mark {
+	background: none;
+	color: var(--rust-dark);
+	font-weight: 600;
+	position: relative;
+	padding: 0 0.05em;
+}
+
+mark::after {
+	content: '';
+	position: absolute;
+	left: -1%;
+	right: -1%;
+	bottom: 0.05em;
+	height: 0.32em;
+	background: color-mix(in srgb, var(--rust) 35%, transparent);
+	z-index: -1;
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+mark.is-visible::after {
+	transform: scaleX(1);
+}
+
+::selection {
+	background: var(--rust);
+	color: var(--paper);
+}
+
+button {
+	font-family: inherit;
+}

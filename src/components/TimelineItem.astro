@@ -1,0 +1,94 @@
+---
+interface Props {
+	year: string;
+	title: string;
+	index: number;
+}
+
+const { year, title, index } = Astro.props;
+---
+
+<article class="item" data-timeline-item style={`--i: ${index}`}>
+	<div class="rail">
+		<span class="dot"></span>
+	</div>
+	<div class="content">
+		<p class="year">{year}</p>
+		<h3>{title}</h3>
+		<div class="body">
+			<slot />
+		</div>
+	</div>
+</article>
+
+<style>
+	.item {
+		display: grid;
+		grid-template-columns: 2.5rem 1fr;
+		gap: 1.25rem;
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.item.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.rail {
+		display: flex;
+		justify-content: center;
+		position: relative;
+	}
+
+	.rail::before {
+		content: '';
+		position: absolute;
+		top: 0.4rem;
+		bottom: -2.5rem;
+		width: 2px;
+		background: var(--line);
+	}
+
+	.item:last-child .rail::before {
+		display: none;
+	}
+
+	.dot {
+		width: 0.75rem;
+		height: 0.75rem;
+		border-radius: 50%;
+		background: var(--paper);
+		border: 2px solid var(--rust);
+		margin-top: 0.35rem;
+		z-index: 1;
+		transition: background 0.3s ease;
+	}
+
+	.item.is-visible .dot {
+		background: var(--rust);
+	}
+
+	.content {
+		padding-bottom: 2.75rem;
+	}
+
+	.year {
+		font-family: var(--font-body);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--moss);
+		font-weight: 600;
+		margin-bottom: 0.3em;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+	}
+
+	.body {
+		margin-bottom: 0;
+	}
+</style>

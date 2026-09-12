@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const quickLinks = [
+	{ href: '/about', label: 'About', desc: 'Twin. Working since 14. Now at CMU.' },
+	{ href: '/professional', label: 'Professional', desc: 'Experience, skills, projects.' },
+	{ href: '/fun', label: 'Fun', desc: 'Movie takes and the teams I yell at.' },
+	{ href: '/contact', label: 'Contact', desc: "Get in touch, I don't bite." },
+];
+---
+
+<BaseLayout title="Home">
+	<section class="hero wrap">
+		<p class="eyebrow">Hayden Smith</p>
+		<h1>I'm a twin who started working at 14 &mdash; now I'm at CMU figuring out what's next.</h1>
+		<p class="sub">This is the site version of that story, plus what I actually do for work, and the stuff I care about when I'm not working at all.</p>
+	</section>
+
+	<section class="links wrap-wide">
+		{
+			quickLinks.map((link) => (
+				<a class="card" href={link.href}>
+					<span class="card-label">{link.label}</span>
+					<span class="card-desc">{link.desc}</span>
+					<span class="card-arrow" aria-hidden="true">&rarr;</span>
+				</a>
+			))
+		}
+	</section>
+</BaseLayout>
+
+<style>
+	.hero {
+		padding-block: 2rem 3.5rem;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--moss);
+		margin-bottom: 1rem;
+	}
+
+	.sub {
+		font-size: 1.15rem;
+		max-width: 38ch;
+		color: color-mix(in srgb, var(--ink) 80%, transparent);
+	}
+
+	.links {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1rem;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		text-decoration: none;
+		color: var(--ink);
+		background: var(--paper-dim);
+		border: 1px solid var(--line);
+		border-radius: 0;
+		padding: 1.4rem;
+		position: relative;
+		transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+	}
+
+	.card:hover {
+		transform: translate(-4px, -4px);
+		border-color: var(--rust);
+	}
+
+	.card:hover .card-arrow {
+		transform: translateX(4px);
+	}
+
+	.card-label {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.3rem;
+	}
+
+	.card-desc {
+		font-size: 0.9rem;
+		color: color-mix(in srgb, var(--ink) 65%, transparent);
+	}
+
+	.card-arrow {
+		position: absolute;
+		top: 1.4rem;
+		right: 1.4rem;
+		color: var(--rust);
+		transition: transform 0.25s ease;
+	}
+</style>

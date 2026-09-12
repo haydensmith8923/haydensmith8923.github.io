@@ -1,0 +1,94 @@
+---
+const links = [
+	{ href: '/', label: 'Home' },
+	{ href: '/about', label: 'About' },
+	{ href: '/professional', label: 'Professional' },
+	{ href: '/fun', label: 'Fun' },
+	{ href: '/contact', label: 'Contact' },
+];
+
+const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
+---
+
+<nav>
+	<div class="wrap-wide bar">
+		<a class="mark" href="/">HS</a>
+		<ul>
+			{
+				links.map((link) => {
+					const isActive = current === link.href.replace(/\/$/, '') || (link.href === '/' && current === '/');
+					return (
+						<li>
+							<a href={link.href} aria-current={isActive ? 'page' : undefined}>
+								{link.label}
+							</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</div>
+</nav>
+
+<style>
+	nav {
+		border-bottom: 1px solid var(--line);
+		background: var(--paper);
+		position: sticky;
+		top: 0;
+		z-index: 10;
+	}
+
+	.bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-block: 1rem;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.mark {
+		font-family: var(--font-display);
+		font-weight: 900;
+		font-size: 1.3rem;
+		text-decoration: none;
+		color: var(--rust-dark);
+	}
+
+	ul {
+		display: flex;
+		gap: 1.6rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		flex-wrap: wrap;
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--ink);
+		font-size: 0.95rem;
+		font-weight: 500;
+		position: relative;
+		padding-block: 0.2rem;
+	}
+
+	a::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -0.15rem;
+		height: 2px;
+		background: var(--rust);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.25s ease;
+	}
+
+	a:hover::after,
+	a[aria-current='page']::after {
+		transform: scaleX(1);
+	}
+</style>

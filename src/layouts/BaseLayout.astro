@@ -1,0 +1,53 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = 'Personal site of Hayden Smith.' } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} · Hayden Smith</title>
+		<ClientRouter />
+	</head>
+	<body>
+		<Nav />
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<div class="wrap">
+				<p>Built by hand, not a template. &copy; {new Date().getFullYear()} Hayden Smith.</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	main {
+		min-height: 70vh;
+		padding-block: 3rem 5rem;
+	}
+
+	footer {
+		border-top: 1px solid var(--line);
+		padding-block: 1.5rem;
+		font-size: 0.85rem;
+		color: color-mix(in srgb, var(--ink) 60%, transparent);
+	}
+
+	footer p {
+		margin: 0;
+	}
+</style>

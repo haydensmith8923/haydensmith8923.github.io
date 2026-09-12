@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skills = ['Replace with', 'your real', 'skill list', 'e.g. Python', 'React', 'SQL'];
+
+const experience = [
+	{
+		role: 'Role title',
+		org: 'Company / Organization',
+		when: '20XX — Present',
+		blurb: 'Placeholder — swap in a real one-liner about impact, not just duties.',
+	},
+	{
+		role: 'Another role',
+		org: 'Company / Organization',
+		when: '20XX — 20XX',
+		blurb: 'Placeholder — same idea, different job.',
+	},
+];
+
+const projects = [
+	{
+		name: 'Project name',
+		blurb: 'One or two sentences on what it does and why it mattered.',
+		link: '#',
+	},
+];
+---
+
+<BaseLayout title="Professional" description="Experience, skills, and projects.">
+	<section class="wrap intro">
+		<p class="eyebrow">Professional</p>
+		<h1>What I actually do</h1>
+		<p class="sub">Experience, skills, and a few things I've built. Résumé below if you want the formal version.</p>
+		<a class="resume-link" href="/resume.pdf" download>Download résumé &darr;</a>
+	</section>
+
+	<section class="wrap block">
+		<h2>Experience</h2>
+		<ul class="exp-list">
+			{
+				experience.map((job) => (
+					<li>
+						<div class="exp-head">
+							<span class="exp-role">{job.role}</span>
+							<span class="exp-when">{job.when}</span>
+						</div>
+						<p class="exp-org">{job.org}</p>
+						<p class="exp-blurb">{job.blurb}</p>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="wrap block">
+		<h2>Skills</h2>
+		<ul class="pill-list">
+			{skills.map((skill) => <li>{skill}</li>)}
+		</ul>
+	</section>
+
+	<section class="wrap block">
+		<h2>Projects</h2>
+		<ul class="project-list">
+			{
+				projects.map((project) => (
+					<li>
+						<a href={project.link}>{project.name} &rarr;</a>
+						<p>{project.blurb}</p>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 2rem 2.5rem;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--moss);
+		margin-bottom: 1rem;
+	}
+
+	.sub {
+		font-size: 1.1rem;
+		color: color-mix(in srgb, var(--ink) 80%, transparent);
+		max-width: 42ch;
+	}
+
+	.resume-link {
+		display: inline-block;
+		margin-top: 1rem;
+		font-weight: 600;
+		color: var(--rust-dark);
+		text-decoration: none;
+		border-bottom: 2px solid var(--rust);
+	}
+
+	.block {
+		padding-block: 2rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.exp-list,
+	.project-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+	}
+
+	.exp-head {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.exp-role {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.2rem;
+	}
+
+	.exp-when {
+		font-size: 0.85rem;
+		color: var(--moss);
+		font-weight: 600;
+	}
+
+	.exp-org {
+		margin: 0.2em 0 0.3em;
+		font-weight: 500;
+		color: color-mix(in srgb, var(--ink) 70%, transparent);
+	}
+
+	.exp-blurb {
+		margin: 0;
+	}
+
+	.pill-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.pill-list li {
+		border: 1px solid var(--line);
+		padding: 0.4rem 0.9rem;
+		font-size: 0.9rem;
+		background: var(--paper-dim);
+	}
+
+	.project-list a {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.15rem;
+		text-decoration: none;
+		color: var(--rust-dark);
+	}
+
+	.project-list p {
+		margin: 0.3em 0 0;
+	}
+</style>

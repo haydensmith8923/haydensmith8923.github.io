@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const movies = await getCollection('movies');
+const teams = await getCollection('teams');
+---
+
+<BaseLayout title="Fun" description="Movie takes and the teams I follow.">
+	<section class="wrap intro">
+		<p class="eyebrow">Fun</p>
+		<h1>The stuff that isn't work</h1>
+		<p class="sub">Hover a card to flip it. Fair warning: my movie opinions are strong and my sports loyalty is stronger.</p>
+	</section>
+
+	<section class="wrap-wide block">
+		<h2>Movie takes</h2>
+		<div class="grid">
+			{
+				movies.map((movie) => (
+					<div class="flip">
+						<div class="flip-inner">
+							<div class="face front">
+								<span class="rating">{'★'.repeat(movie.data.rating)}{'☆'.repeat(5 - movie.data.rating)}</span>
+								<span class="title">{movie.data.title}</span>
+							</div>
+							<div class="face back">
+								<p>{movie.data.verdict}</p>
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="wrap-wide block">
+		<h2>Teams I follow</h2>
+		<div class="grid">
+			{
+				teams.map((team) => (
+					<div class="flip">
+						<div class="flip-inner">
+							<div class="face front">
+								<span class="league">{team.data.league}</span>
+								<span class="title">{team.data.name}</span>
+							</div>
+							<div class="face back">
+								<p>{team.data.blurb}</p>
+								<p class="since">{team.data.sinceWhen}</p>
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 2rem 2.5rem;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--moss);
+		margin-bottom: 1rem;
+	}
+
+	.sub {
+		font-size: 1.1rem;
+		color: color-mix(in srgb, var(--ink) 80%, transparent);
+		max-width: 46ch;
+	}
+
+	.block {
+		padding-block: 2rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1.25rem;
+	}
+
+	.flip {
+		perspective: 1000px;
+		height: 170px;
+	}
+
+	.flip-inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		text-align: left;
+		transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+		transform-style: preserve-3d;
+	}
+
+	.flip:hover .flip-inner,
+	.flip:focus-within .flip-inner {
+		transform: rotateY(180deg);
+	}
+
+	.face {
+		position: absolute;
+		inset: 0;
+		backface-visibility: hidden;
+		border: 1px solid var(--line);
+		padding: 1.2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.4rem;
+	}
+
+	.front {
+		background: var(--paper-dim);
+	}
+
+	.back {
+		background: var(--rust);
+		color: var(--paper);
+		transform: rotateY(180deg);
+	}
+
+	.rating {
+		color: var(--rust);
+		letter-spacing: 0.1em;
+	}
+
+	.league {
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+		color: var(--moss);
+		font-weight: 600;
+	}
+
+	.title {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.2rem;
+	}
+
+	.back p {
+		margin: 0;
+		font-size: 0.95rem;
+	}
+
+	.since {
+		margin-top: 0.5em !important;
+		font-size: 0.8rem !important;
+		opacity: 0.85;
+	}
+</style>

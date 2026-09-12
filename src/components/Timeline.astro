@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import TimelineItem from './TimelineItem.astro';
+
+const entries = await getCollection('timeline');
+entries.sort((a, b) => a.data.order - b.data.order);
+
+const items = await Promise.all(
+	entries.map(async (entry, index) => {
+		const { Content } = await render(entry);
+		return { entry, index, Content };
+	})
+);
+---
+
+<div class="timeline" data-timeline>
+	{
+		items.map(({ entry, index, Content }) => (
+			<TimelineItem year={entry.data.year} title={entry.data.title} index={index}>
+				<Content />
+			</TimelineItem>
+		))
+	}
+</div>
+
+<script>
+	const items = document.querySelectorAll('[data-timeline-item]');
+	const observer = new IntersectionObserver(
+		(entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+					const marks = entry.target.querySelectorAll('mark');
+					marks.forEach((m) => m.classList.add('is-visible'));
+					observer.unobserve(entry.target);
+				}
+			}
+		},
+		{ threshold: 0.3, rootMargin: '0px 0px -10% 0px' }
+	);
+
+	for (const item of items) observer.observe(item);
+</script>
