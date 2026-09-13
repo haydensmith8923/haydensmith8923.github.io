@@ -9,9 +9,9 @@ const spots = [
 		name: 'Lifeguard Tower',
 		label: 'Leadership',
 		sub: 'Execution under pressure',
-		left: 41,
-		bottom: 39,
-		width: 3.4,
+		left: 15,
+		bottom: 30,
+		width: 7.5,
 		rotate: 0,
 	},
 	{
@@ -31,9 +31,9 @@ const spots = [
 		name: 'Suitcase',
 		label: 'Investment Banking',
 		sub: 'Where I want to go next',
-		left: 75,
-		bottom: 16,
-		width: 6.5,
+		left: 74,
+		bottom: 15,
+		width: 6,
 		rotate: -4,
 	},
 	{
@@ -43,8 +43,8 @@ const spots = [
 		label: 'My Journal',
 		sub: 'Notes in progress',
 		left: 80,
-		bottom: 9,
-		width: 4.5,
+		bottom: 11,
+		width: 4.2,
 		rotate: 8,
 	},
 	{
@@ -59,6 +59,9 @@ const spots = [
 		rotate: -10,
 	},
 ];
+
+// Decorative only (not a hotspot) — sits beneath the suitcase/notebook.
+const blanket = { left: 77, bottom: 9, width: 17 };
 ---
 
 <section class="scene" data-scene aria-label="Interactive beach photo — explore the site through objects on the shore">
@@ -85,6 +88,13 @@ const spots = [
 		</span>
 	</button>
 
+	<button class="hotspot shore-hotspot" data-hotspot aria-label="The shore">
+		<span class="tooltip">
+			<strong>The Shore</strong>
+			<em>Every path on this beach starts here.</em>
+		</span>
+	</button>
+
 	<svg class="footprints" viewBox="0 0 90 140" preserveAspectRatio="xMidYMax meet" data-footprints aria-hidden="true">
 		<g fill="currentColor" opacity="0.55">
 			<ellipse cx="30" cy="128" rx="6" ry="10" />
@@ -99,6 +109,14 @@ const spots = [
 	<button class="easter shell" data-easter="shell" aria-label="A shell on the sand" style="left:93%; bottom:26%;">
 		<svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 3c4 2 7 6 7 11a7 7 0 0 1-14 0c0-5 3-9 7-11Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v10M9 10l3-2 3 2M8.5 14l3.5-2 3.5 2" fill="none" stroke="currentColor" stroke-width="1"/></svg>
 	</button>
+
+	<img
+		class="blanket"
+		src="/images/objects/blanket.webp"
+		alt=""
+		aria-hidden="true"
+		style={`left:${blanket.left}%; bottom:${blanket.bottom}%; width:${blanket.width}%;`}
+	/>
 
 	{
 		spots.map((s) => (
@@ -218,6 +236,40 @@ const spots = [
 		cursor: pointer;
 		padding: 0;
 		z-index: 2;
+	}
+
+	.shore-hotspot {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 58%;
+		bottom: 0;
+		background: none;
+		border: none;
+		cursor: default;
+		padding: 0;
+		z-index: 1;
+	}
+
+	.shore-hotspot .tooltip {
+		left: 50%;
+		bottom: auto;
+		top: 30%;
+		transform: translate(-50%, -40%);
+	}
+
+	.shore-hotspot:hover .tooltip,
+	.shore-hotspot:focus-visible .tooltip {
+		transform: translate(-50%, -50%);
+	}
+
+	.blanket {
+		position: absolute;
+		display: block;
+		height: auto;
+		transform: translateX(-50%);
+		z-index: 1;
+		pointer-events: none;
 	}
 
 	.footprints {
@@ -471,8 +523,10 @@ const spots = [
 		}
 
 		.ocean-hotspot,
+		.shore-hotspot,
 		.footprints,
 		.hotspot.object,
+		.blanket,
 		.easter,
 		.sun-easter {
 			display: none;
