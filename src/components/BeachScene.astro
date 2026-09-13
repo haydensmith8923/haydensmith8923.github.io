@@ -1,20 +1,29 @@
 ---
+// Positions/sizes/rotations were hand-tuned against the actual hero photo's
+// rock and shoreline geometry (see the composed reference render) so each
+// object sits on real open sand at a plausible distance/scale, not a row.
 const spots = [
+	{
+		id: 'tower',
+		href: '/leadership',
+		name: 'Lifeguard Tower',
+		label: 'Leadership',
+		sub: 'Execution under pressure',
+		left: 41,
+		bottom: 39,
+		width: 3.4,
+		rotate: 0,
+	},
 	{
 		id: 'chair',
 		href: '/about',
 		name: 'Beach Chair',
 		label: 'About Me',
 		sub: 'Where it started',
-		style: 'left:38%; bottom:10%;',
-	},
-	{
-		id: 'notebook',
-		href: '/journal',
-		name: 'Notebook',
-		label: 'My Journal',
-		sub: 'Notes in progress',
-		style: 'left:50%; bottom:16%;',
+		left: 64,
+		bottom: 19,
+		width: 10,
+		rotate: 0,
 	},
 	{
 		id: 'suitcase',
@@ -22,7 +31,21 @@ const spots = [
 		name: 'Suitcase',
 		label: 'Investment Banking',
 		sub: 'Where I want to go next',
-		style: 'left:60%; bottom:8%;',
+		left: 75,
+		bottom: 16,
+		width: 6.5,
+		rotate: -4,
+	},
+	{
+		id: 'notebook',
+		href: '/journal',
+		name: 'Notebook',
+		label: 'My Journal',
+		sub: 'Notes in progress',
+		left: 80,
+		bottom: 9,
+		width: 4.5,
+		rotate: 8,
 	},
 	{
 		id: 'surfboard',
@@ -30,15 +53,10 @@ const spots = [
 		name: 'Surfboard',
 		label: 'Experience',
 		sub: 'What I’ve done so far',
-		style: 'left:71%; bottom:11%;',
-	},
-	{
-		id: 'tower',
-		href: '/leadership',
-		name: 'Lifeguard Tower',
-		label: 'Leadership',
-		sub: 'Execution under pressure',
-		style: 'left:84%; bottom:9%;',
+		left: 92,
+		bottom: 8,
+		width: 9,
+		rotate: -10,
 	},
 ];
 ---
@@ -84,11 +102,15 @@ const spots = [
 
 	{
 		spots.map((s) => (
-			<a class={`hotspot object object-${s.id}`} data-hotspot href={s.href} style={s.style} aria-label={`${s.name}: ${s.label} — ${s.sub}`}>
-				<span class="badge">
-					<img src={`/images/objects/${s.id}.webp`} alt="" width="120" height="120" loading="eager" />
-				</span>
-				<span class="caption">{s.name}</span>
+			<a
+				class={`hotspot object object-${s.id}`}
+				data-hotspot
+				href={s.href}
+				style={`left:${s.left}%; bottom:${s.bottom}%; width:${s.width}%;`}
+				aria-label={`${s.name}: ${s.label} — ${s.sub}`}
+			>
+				<span class="obj-shadow" aria-hidden="true" />
+				<img class="obj-img" style={`--rot:${s.rotate}deg;`} src={`/images/objects/${s.id}.webp`} alt="" loading="eager" />
 				<span class="tooltip">
 					<strong>{s.label}</strong>
 					<em>{s.sub}</em>
@@ -200,10 +222,10 @@ const spots = [
 
 	.footprints {
 		position: absolute;
-		left: 30%;
+		left: 60%;
 		bottom: 0;
-		width: 22%;
-		height: 42%;
+		width: 13%;
+		height: 30%;
 		color: var(--wood);
 		z-index: 2;
 	}
@@ -221,57 +243,47 @@ const spots = [
 	}
 
 	.hotspot.object {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
-		transform: translate(-50%, 50%);
+		transform: translateX(-50%);
 	}
 
-	.badge {
-		display: block;
-		width: 68px;
-		height: 68px;
-		border-radius: 50%;
-		overflow: hidden;
-		background: var(--sand);
-		box-shadow: 0 8px 20px rgba(8, 14, 24, 0.4), 0 0 0 3px rgba(250, 247, 240, 0.9), 0 0 0 4px rgba(8, 14, 24, 0.25);
-		transition: transform 0.35s var(--ease), box-shadow 0.35s ease;
-	}
-
-	.badge img {
+	.obj-img {
 		display: block;
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		height: auto;
+		transform: rotate(var(--rot, 0deg));
+		transform-origin: 50% 85%;
+		transition: transform 0.2s ease, filter 0.2s ease;
+		filter: drop-shadow(0 1px 1px rgba(8, 14, 24, 0.25));
 	}
 
-	.caption {
-		font-size: 0.68rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--off-white);
-		background: rgba(8, 14, 24, 0.55);
-		padding: 0.25em 0.7em;
-		border-radius: 999px;
-		white-space: nowrap;
+	.obj-shadow {
+		position: absolute;
+		left: 50%;
+		bottom: -6%;
+		width: 78%;
+		height: 20%;
+		transform: translateX(-50%);
+		background: radial-gradient(ellipse at center, rgba(5, 8, 14, 0.45) 0%, rgba(5, 8, 14, 0) 72%);
+		filter: blur(2px);
+		pointer-events: none;
+		z-index: -1;
+		transition: opacity 0.2s ease;
 	}
 
-	.hotspot.object:hover,
-	.hotspot.object:focus-visible {
-		transform: translate(-50%, 50%) translateY(-4px);
+	.hotspot.object:hover .obj-img,
+	.hotspot.object:focus-visible .obj-img {
+		transform: rotate(var(--rot, 0deg)) scale(1.035) translateY(-2px);
+		filter: drop-shadow(0 3px 4px rgba(8, 14, 24, 0.3)) brightness(1.08);
 	}
 
-	.hotspot.object:hover .badge,
-	.hotspot.object:focus-visible .badge {
-		box-shadow: 0 12px 26px rgba(8, 14, 24, 0.5), 0 0 0 3px var(--off-white), 0 0 0 4px var(--sunset);
-		transform: scale(1.08);
+	.hotspot.object:hover .obj-shadow,
+	.hotspot.object:focus-visible .obj-shadow {
+		opacity: 0.7;
 	}
 
 	.hotspot:focus-visible {
-		outline: 2px solid var(--sunset);
-		outline-offset: 4px;
+		outline: 1px solid rgba(250, 247, 240, 0.8);
+		outline-offset: 3px;
 	}
 
 	.tooltip {
