@@ -1,12 +1,12 @@
 ---
-org: "Student Investment Fund"
-role: "TMT Coverage"
-dates: "[Add dates]"
+org: "Tartan Student Fund"
+role: "Equity Research Analyst — TMT Team"
+dates: "Jan 2026 – Present"
 category: "finance"
 order: 1
-placeholder: true
+placeholder: false
 bullets:
-  - "[Add a quantitative bullet — e.g. sector allocation managed, names pitched, portfolio impact]"
-  - "[Add a bullet on process — e.g. how coverage decisions were made, models built]"
-  - "[Add an outcome bullet — e.g. pitch adopted, performance vs. benchmark]"
+  - "Pitch long-only ideas in the TMT sector to CMU's student-managed investment fund, which oversees $180,000+ in AUM."
+  - "Built variant views on names like RDDT and FORM using public comps, DCF analysis, and SEC-filing-level fundamental research to identify specific growth drivers the market wasn't fully pricing in."
+  - "Maintain weekly coverage on 5 TMT stocks — tracking earnings, catalysts, and valuation shifts to call the right time to buy, hold, or sell."
 ---

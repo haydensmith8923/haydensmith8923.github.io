@@ -1,7 +1,7 @@
 ---
 const links = [
-	{ label: 'LinkedIn', value: '[Add LinkedIn URL]', href: '#' },
-	{ label: 'Email', value: '[Add contact email]', href: '#' },
+	{ label: 'LinkedIn', value: 'in/hayden-smith29', href: 'https://www.linkedin.com/in/hayden-smith29' },
+	{ label: 'Email', value: 'haydensmith8923@gmail.com', href: 'mailto:haydensmith8923@gmail.com' },
 	{ label: 'Résumé', value: 'View PDF', href: '/resume.pdf' },
 ];
 ---
@@ -12,7 +12,7 @@ const links = [
 		{
 			links.map((link) => (
 				<li>
-					<a href={link.href} target={link.href.startsWith('/') ? '_blank' : undefined} rel="noopener">
+					<a href={link.href} target={link.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">
 						<span class="label">{link.label}</span>
 						<span class="value">{link.value} &rarr;</span>
 					</a>
