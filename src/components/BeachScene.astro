@@ -53,10 +53,10 @@ const spots = [
 		name: 'Surfboard',
 		label: 'Experience',
 		sub: 'What I’ve done so far',
-		left: 26,
-		bottom: 15,
-		width: 5,
-		rotate: -12,
+		left: 55,
+		bottom: 38,
+		width: 3.4,
+		rotate: 40,
 	},
 ];
 
@@ -144,7 +144,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 		<p class="kicker">From the Gulf Coast to Wall Street</p>
 		<h1>HAYDEN SMITH</h1>
 		<p class="sub">Carnegie Mellon University &middot; Business Administration</p>
-		<p class="tag">From Florida to finance.</p>
 		<p class="hint" data-hint>Explore the shore to begin.</p>
 	</div>
 
@@ -306,6 +305,10 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 		transform-origin: 50% 85%;
 		transition: transform 0.2s ease, filter 0.2s ease;
 		filter: drop-shadow(0 1px 1px rgba(8, 14, 24, 0.25));
+	}
+
+	.object-surfboard .obj-shadow {
+		display: none;
 	}
 
 	.obj-shadow {
