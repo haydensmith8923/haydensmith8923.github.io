@@ -11,7 +11,7 @@ const spots = [
 		sub: 'Execution under pressure',
 		left: 15,
 		bottom: 30,
-		width: 11,
+		width: 22,
 		rotate: 0,
 	},
 	{
@@ -75,19 +75,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 	</picture>
 	<div class="scrim" aria-hidden="true"></div>
 
-	<button
-		class="hotspot ocean-hotspot"
-		data-hotspot
-		data-href="/research"
-		aria-label="Investment Research — finding what the market may be missing"
-	>
-		<span class="tooltip">
-			<strong>Investment Research</strong>
-			<em>Finding what the market may be missing</em>
-			<span class="open">Open &rarr;</span>
-		</span>
-	</button>
-
 	<button class="hotspot shore-hotspot" data-hotspot aria-label="The shore">
 		<span class="tooltip">
 			<strong>The Shore</strong>
@@ -105,10 +92,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 			<ellipse cx="52" cy="8" rx="6" ry="10" />
 		</g>
 	</svg>
-
-	<button class="easter shell" data-easter="shell" aria-label="A shell on the sand" style="left:93%; bottom:26%;">
-		<svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 3c4 2 7 6 7 11a7 7 0 0 1-14 0c0-5 3-9 7-11Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v10M9 10l3-2 3 2M8.5 14l3.5-2 3.5 2" fill="none" stroke="currentColor" stroke-width="1"/></svg>
-	</button>
 
 	<img
 		class="blanket"
@@ -154,7 +137,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 </section>
 
 <script define:vars={{
-	shellText: "I'm a twin — there's always been two of us telling this story.",
 	sunText: "“Good days and bad days can happen simultaneously. Show up for both.”",
 }}>
 	const popover = document.querySelector('[data-easter-popover]');
@@ -162,7 +144,7 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 	const closeBtn = document.querySelector('[data-easter-close]');
 	const hint = document.querySelector('[data-hint]');
 
-	const texts = { shell: shellText, sun: sunText };
+	const texts = { sun: sunText };
 
 	document.querySelectorAll('[data-easter]').forEach((el) => {
 		el.addEventListener('click', () => {
@@ -222,19 +204,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 			rgba(8, 14, 24, 0.16) 72%,
 			rgba(8, 14, 24, 0.5) 100%
 		);
-	}
-
-	.ocean-hotspot {
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 16%;
-		height: 42%;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
-		z-index: 2;
 	}
 
 	.shore-hotspot {
@@ -389,18 +358,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 		transform: translate(-50%, 0);
 	}
 
-	.ocean-hotspot .tooltip {
-		left: 50%;
-		bottom: auto;
-		top: 50%;
-		transform: translate(-50%, -40%);
-	}
-
-	.ocean-hotspot:hover .tooltip,
-	.ocean-hotspot:focus-visible .tooltip {
-		transform: translate(-50%, -50%);
-	}
-
 	.easter {
 		position: absolute;
 		background: none;
@@ -525,7 +482,6 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 			min-height: 420px;
 		}
 
-		.ocean-hotspot,
 		.shore-hotspot,
 		.footprints,
 		.hotspot.object,

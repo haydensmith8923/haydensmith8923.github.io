@@ -22,6 +22,27 @@
 	--max-w: 46rem;
 	--ease: cubic-bezier(0.16, 1, 0.3, 1);
 	color-scheme: light;
+
+	/* page-level surface/text roles — kept separate from --off-white/--ink/--navy-deep
+	   since those are also used as fixed light/dark fills on accent chips and buttons
+	   that must stay the same in both themes. */
+	--bg: var(--off-white);
+	--fg: var(--ink);
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--bg: #101c29;
+	--fg: #e7e1d3;
+	--line: rgba(231, 225, 211, 0.14);
+	--ocean: #86aec0;
+	--ocean-light: #b3d0da;
+	--sunset: #e0a06c;
+	--sunset-deep: #d99361;
+}
+
+:root[data-theme='dark'] body {
+	background: radial-gradient(130% 130% at 18% -8%, #17293b 0%, #0d1822 45%, #080e15 100%);
 }
 
 * {
@@ -46,8 +67,8 @@ html {
 
 body {
 	margin: 0;
-	background: var(--off-white);
-	color: var(--ink);
+	background: var(--bg);
+	color: var(--fg);
 	font-family: var(--font-body);
 	line-height: 1.65;
 	-webkit-font-smoothing: antialiased;
@@ -158,7 +179,7 @@ button {
 	font-weight: 600;
 	letter-spacing: 0.04em;
 	text-decoration: none;
-	color: var(--navy-deep);
+	color: var(--fg);
 	border: 1px solid var(--line);
 	padding: 0.75em 1.3em;
 	transition: border-color 0.25s ease, transform 0.25s var(--ease), background 0.25s ease;

@@ -74,7 +74,7 @@ const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background: var(--off-white);
+		background: var(--bg);
 		border-bottom: 1px solid var(--line);
 	}
 
@@ -106,7 +106,7 @@ const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 		font-size: 1.05rem;
 		letter-spacing: 0.04em;
 		text-decoration: none;
-		color: var(--navy-deep);
+		color: var(--fg);
 		white-space: nowrap;
 	}
 
@@ -130,7 +130,7 @@ const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 
 	.links a {
 		text-decoration: none;
-		color: var(--navy-deep);
+		color: var(--fg);
 		font-size: 0.82rem;
 		font-weight: 600;
 		letter-spacing: 0.04em;
@@ -197,7 +197,7 @@ const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 		display: block;
 		width: 20px;
 		height: 1px;
-		background: var(--navy-deep);
+		background: var(--fg);
 	}
 
 	.transparent .menu-toggle .line {
@@ -212,7 +212,7 @@ const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 		.links {
 			position: fixed;
 			inset: 64px 0 0 0;
-			background: var(--off-white);
+			background: var(--bg);
 			flex-direction: column;
 			align-items: flex-start;
 			padding: 2rem 1.5rem;
@@ -234,13 +234,13 @@ const current = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 		}
 
 		.links a {
-			color: var(--navy-deep) !important;
+			color: var(--fg) !important;
 			font-size: 1.1rem;
 		}
 
 		.resume-btn {
 			border-color: var(--line) !important;
-			color: var(--navy-deep) !important;
+			color: var(--fg) !important;
 		}
 	}
 </style>

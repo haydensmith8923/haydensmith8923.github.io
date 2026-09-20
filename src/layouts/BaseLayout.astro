@@ -10,6 +10,7 @@ interface Props {
 	fullBleed?: boolean;
 	transparentNav?: boolean;
 	showConnect?: boolean;
+	dark?: boolean;
 }
 
 const {
@@ -18,10 +19,11 @@ const {
 	fullBleed = false,
 	transparentNav = false,
 	showConnect = true,
+	dark = true,
 } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-theme={dark ? 'dark' : undefined}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,7 +62,7 @@ const {
 		border-top: 1px solid var(--line);
 		padding-block: 1.5rem;
 		font-size: 0.78rem;
-		color: color-mix(in srgb, var(--ink) 55%, transparent);
+		color: color-mix(in srgb, var(--fg) 55%, transparent);
 	}
 
 	footer p {
