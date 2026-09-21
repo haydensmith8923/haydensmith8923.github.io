@@ -14,7 +14,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={`${entry.data.title} — Journal — Hayden Smith`} description={entry.data.excerpt}>
+<BaseLayout title={`${entry.data.title} | Journal | Hayden Smith`} description={entry.data.excerpt}>
 	<article class="wrap post">
 		<a class="back-link" href="/journal">&larr; Back to the journal</a>
 		<p class="tag">{entry.data.tag} &middot; {entry.data.date}</p>

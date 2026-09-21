@@ -8,13 +8,13 @@ const directory = [
 	{ href: '/leadership', label: 'Leadership', sub: 'Execution under pressure' },
 	{ href: '/research', label: 'Investment Research', sub: 'Finding what the market may be missing' },
 	{ href: '/investment-banking', label: 'Investment Banking', sub: 'Where I want to go next' },
-	{ href: '/journal', label: 'The Journal', sub: 'Notes in progress' },
+	{ href: '/journal', label: 'The Journal', sub: 'Off the clock' },
 ];
 ---
 
 <BaseLayout
 	title="From the Gulf Coast to Wall Street"
-	description="Hayden Smith — Carnegie Mellon University, Business Administration. From Florida to finance."
+	description="Hayden Smith, Carnegie Mellon University, Business Administration. From Florida to finance."
 	fullBleed
 	transparentNav
 	showConnect={false}
@@ -25,6 +25,9 @@ const directory = [
 	<section class="directory wrap-wide">
 		<p class="eyebrow">Find your way in</p>
 		<h2>Every object on the shore is a door.</h2>
+		<p class="now">
+			I'm a Business Administration student at Carnegie Mellon's Tepper School, finance concentration with an additional major in statistics, class of 2029. I cover TMT names for the Tartan Student Fund and I'm recruiting for investment banking internships.
+		</p>
 		<div class="grid">
 			{
 				directory.map((d) => (
@@ -56,7 +59,14 @@ const directory = [
 
 	h2 {
 		max-width: 26ch;
-		margin-bottom: 2.5rem;
+		margin-bottom: 1.2rem;
+	}
+
+	.now {
+		max-width: 60ch;
+		margin: 0 0 2.5rem;
+		font-size: 0.98rem;
+		color: var(--ocean);
 	}
 
 	.grid {

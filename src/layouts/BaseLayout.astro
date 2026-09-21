@@ -15,12 +15,16 @@ interface Props {
 
 const {
 	title,
-	description = 'Hayden Smith — from the Gulf Coast to Wall Street.',
+	description = 'Hayden Smith, from the Gulf Coast to Wall Street.',
 	fullBleed = false,
 	transparentNav = false,
 	showConnect = true,
 	dark = true,
 } = Astro.props;
+
+const site = Astro.site ?? new URL('https://haydensmith8923.github.io');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL('/images/beach-hero.webp', site).href;
 ---
 
 <html lang="en" data-theme={dark ? 'dark' : undefined}>
@@ -29,8 +33,23 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonical} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Hayden Smith" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:alt" content="A Florida shoreline at sunset." />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
 		<ClientRouter />
 	</head>
 	<body>

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
 	const all = await getCollection('research');
@@ -17,14 +17,16 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const d = entry.data;
+const { Content } = await render(entry);
+const hasNotes = entry.body != null && entry.body.trim().length > 0;
 ---
 
-<BaseLayout title={`${d.company} (${d.ticker}) — Research — Hayden Smith`} description={d.question}>
+<BaseLayout title={`${d.company} (${d.ticker}) | Research | Hayden Smith`} description={d.question}>
 	<article class="memo wrap">
 		<a class="back-link" href="/research">&larr; Back to research</a>
 
 		{d.placeholder && (
-			<p class="placeholder-notice">This case study contains placeholder fields — replace them with the real report.</p>
+			<p class="placeholder-notice">This case study contains placeholder fields. Replace them with the real report.</p>
 		)}
 
 		<header class="memo-head">
@@ -96,6 +98,12 @@ const d = entry.data;
 			<p class="label">Conclusion</p>
 			<p class="big">{d.conclusion}</p>
 		</section>
+
+		{hasNotes && (
+			<section class="memo-section notes">
+				<Content />
+			</section>
+		)}
 	</article>
 </BaseLayout>
 
@@ -227,5 +235,21 @@ const d = entry.data;
 
 	.conclusion .big {
 		color: var(--fg);
+	}
+
+	.notes {
+		max-width: 62ch;
+	}
+
+	.notes :global(h2) {
+		font-size: 1.15rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--ocean);
+		margin: 0 0 1rem;
+	}
+
+	.notes :global(p) {
+		font-size: 0.98rem;
 	}
 </style>

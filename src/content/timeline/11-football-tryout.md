@@ -1,7 +1,7 @@
 ---
-year: "2023"
-title: "Trying out for football"
+year: "2024"
+title: "Captain of a team I had just joined"
 order: 11
 ---
 
-Right after leaving a sport I'd played for years, I tried out for one I'd never played at all. It showed me <mark>a completely different side of high school</mark> — a different locker room, a different set of expectations, a different way to earn respect from a group of people who owed me none of it going in. Being a total beginner again, on purpose, is uncomfortable. It's also the fastest way to find out how you actually handle being bad at something in front of people, which is a more useful data point than any test score.
+I tried out for football in 2023 having never played a down. New locker room, new sport, and a group of guys who owed me exactly nothing. By senior year they voted me <mark>captain</mark>, and that fall we made the playoffs for the first time in more than five years. Starting over as the least qualified person in the room turned out to be the fastest way to learn how you earn standing when none of it is given to you up front.

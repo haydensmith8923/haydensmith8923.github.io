@@ -23,7 +23,7 @@
 	--ease: cubic-bezier(0.16, 1, 0.3, 1);
 	color-scheme: light;
 
-	/* page-level surface/text roles — kept separate from --off-white/--ink/--navy-deep
+	/* page-level surface/text roles, kept separate from --off-white/--ink/--navy-deep
 	   since those are also used as fixed light/dark fills on accent chips and buttons
 	   that must stay the same in both themes. */
 	--bg: var(--off-white);

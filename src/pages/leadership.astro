@@ -7,7 +7,7 @@ all.sort((a, b) => a.data.order - b.data.order);
 const rendered = await Promise.all(all.map(async (e) => ({ entry: e, Content: (await render(e)).Content })));
 ---
 
-<BaseLayout title="Leadership — Hayden Smith" description="Execution, coordination, and responsibility under pressure.">
+<BaseLayout title="Leadership | Hayden Smith" description="Execution, coordination, and responsibility under pressure.">
 	<section class="wrap-wide intro">
 		<a class="back-link" href="/">&larr; Back to the beach</a>
 		<p class="eyebrow">Leadership</p>

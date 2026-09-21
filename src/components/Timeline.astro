@@ -30,7 +30,7 @@ const items = await Promise.all(
 
 	if (!reduceMotion && timeline) {
 		// Opt into the hidden-until-scrolled-into-view state only when JS
-		// and motion are both available — content stays visible otherwise.
+		// and motion are both available. Content stays visible otherwise.
 		timeline.classList.add('js-reveal');
 
 		const reveal = (item) => {

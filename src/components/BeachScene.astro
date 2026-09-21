@@ -60,11 +60,11 @@ const spots = [
 	},
 ];
 
-// Decorative only (not a hotspot) — sits beneath the suitcase/notebook.
+// Decorative only (not a hotspot), sits beneath the suitcase/notebook.
 const blanket = { left: 77, bottom: 9, width: 17 };
 ---
 
-<section class="scene" data-scene aria-label="Interactive beach photo — explore the site through objects on the shore">
+<section class="scene" data-scene aria-label="Interactive beach photo: explore the site through objects on the shore">
 	<picture class="bg-photo">
 		<source media="(max-width: 780px)" srcset="/images/beach-hero-mobile.webp" />
 		<img
@@ -108,7 +108,7 @@ const blanket = { left: 77, bottom: 9, width: 17 };
 				data-hotspot
 				href={s.href}
 				style={`left:${s.left}%; bottom:${s.bottom}%; width:${s.width}%;`}
-				aria-label={`${s.name}: ${s.label} — ${s.sub}`}
+				aria-label={`${s.name}: ${s.label}. ${s.sub}`}
 			>
 				<span class="obj-shadow" aria-hidden="true" />
 				<img class="obj-img" style={`--rot:${s.rotate}deg;`} src={`/images/objects/${s.id}.webp`} alt="" loading="eager" />
