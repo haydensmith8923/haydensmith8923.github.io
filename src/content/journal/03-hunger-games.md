@@ -3,13 +3,13 @@ title: "The Hunger Games, and Thinking for Yourself"
 tag: "DYSTOPIAN FILM"
 date: "2026"
 order: 3
-excerpt: "Katniss keeps refusing the story she's handed, by every side, including her own. That habit is worth more now than it was when the films came out."
+excerpt: "Katniss keeps refusing the role everyone hands her, which feels even more relevant now that AI will hand you an answer to anything."
 ---
 
-The obvious thing to say about The Hunger Games is that Katniss defies the Capitol, which is true and also the least interesting version of it. What actually makes the series work is that she keeps refusing the story she's being handed no matter who is handing it to her. The Capitol wants a spectacle. Snow wants a symbol he can control. District 13 wants a mascot for a war they have already decided to fight. Every single one of them has a narrative ready for her, complete and convincing and produced, and she keeps declining to be the character in it.
+If you somehow missed it, The Hunger Games is about Katniss Everdeen, a girl from a poor district who volunteers to take her little sister's place in a televised fight to the death. The obvious thing to say is that she stands up to the Capitol, which is true, but what I like more is that she keeps refusing the role everyone else wants her to play. The Capitol wants a good show. President Snow wants her quiet. District 13 wants a mascot for its war. Every side has a part picked out for her, and she keeps pushing back on all of them.
 
-That's the part I keep thinking about, and it has gotten more relevant rather than less. We're all now a search box away from a confident, well-written, entirely persuasive answer to basically anything. AI will hand you a finished narrative in four seconds, and it will sound right, and most of the time nobody checks. The skill the series is actually teaching is the one Katniss demonstrates constantly: sit with the version you were given, notice who benefits from you believing it, and decide for yourself. That is a real habit and it is getting rarer at exactly the moment it's worth the most.
+That feels even more relevant now than when the movies came out. AI can give you a confident, well-written answer to almost anything in a few seconds, and it's easy to just take it without checking. Katniss never accepts the version she's handed at face value. She asks who benefits from her believing it and then decides for herself. I've been trying to do more of that myself, especially with AI.
 
-None of which is why I put the movies on. I watch them because they're great. The reaping in the first film is genuinely tense before anything violent has happened. The arena sequences are paced well, the tracker jacker scene still works, and Catching Fire has the best structure of the four by some distance, with the clock arena and the reveal at the end of it. The action is not filler around the message. It's the reason the message reaches anyone at all.
+That's not really why I put the movies on, though. I watch them because they're fun. The reaping scene in the first movie is tense before anything violent even happens, the tracker jacker scene still gets me, and Catching Fire is my favorite of the four, mostly because of the clock arena and the twist at the end. The action is what pulls you in, and the message sticks because by then you actually care what happens to her.
 
-That's the thing these films get right that most of the genre doesn't. You can build something with a real argument inside it and still make it fun enough that people watch it four times. The ideas stick because the movie earned your attention first.
+If you've only seen the first one, watch Catching Fire.

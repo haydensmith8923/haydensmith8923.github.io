@@ -13,14 +13,14 @@ stats:
     label: "chapter dinners"
 ---
 
-I was elected Brotherhood Chair of a chapter with more than 100 members. The role owns engagement and culture, which in practice means one problem: nobody in a fraternity reports to me, and nobody is obligated to show up to anything I put on the calendar. Attendance has to be earned by making the thing worth attending.
+I'm the Brotherhood Chair for a chapter of more than 100 members, which puts me in charge of engagement and culture. Nobody in a fraternity reports to me, and nobody has to show up to anything I put on the calendar, so the only way to get people there is to plan things they actually want to come to.
 
-Here's the mandate and what I'm building into it:
+Here's what the role involves and what I'm doing with it.
 
-- **Hold together a chapter of 100+ across four class years.** A group that size doesn't fragment on purpose. It fragments by default, into pledge classes and friend groups that stop overlapping once the newest members find their footing. Counteracting that is the actual job.
-- **Run a weekly competition series as the engine.** Recurring, low-commitment, and deliberately fun. The design intent matters more than the games: teams get mixed across pledge classes so the same clusters can't keep re-forming, and the cadence is weekly so showing up never requires planning around it.
-- **Anchor the month with a full-chapter dinner.** One predictable night where everyone is in the same room, not just the people who already spend time together.
-- **Organize a chapter retreat this term.** A weekend built around one question: what do the brothers actually want this chapter to be? I'd rather collect that from the room than decide it from the chair and hope it lands.
-- **Track participation from day one.** I want to hand this role off with data instead of anecdotes, so I'm measuring turnout from the start rather than reconstructing it at the end.
+- A group of 100+ tends to split into pledge classes and friend groups that don't mix much. My job is to push back against that and build a culture where everyone feels included.
+- I run weekly competitions that are low commitment and meant to be fun. Teams get mixed across pledge classes so people end up competing alongside brothers they don't usually spend time with, and because it happens every week, showing up doesn't take any planning.
+- Once a month we hold a full-chapter dinner, a scheduled night where the whole chapter is together instead of just the people who already hang out.
+- I'm organizing a weekend retreat later this term where brothers can talk through how they want the chapter to improve. People who help build something are a lot more likely to support it than people who just have it handed to them.
+- I'm tracking attendance from the start so that whoever takes this role after me has real numbers to work from.
 
-It's the same problem as running the Greek Sing crew, minus the deadline and minus any authority at all: get a large group of people who don't work for you to care enough to show up.
+It's the same challenge I faced running the Greek Sing crew, which was getting a large group of people who don't work for me to care enough to show up.
