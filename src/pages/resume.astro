@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Résumé | Hayden Smith" description="Hayden Smith's résumé. Carnegie Mellon, Tepper School of Business.">
+	<section class="wrap-wide intro">
+		<a class="back-link" href="/">&larr; Back to the beach</a>
+		<p class="eyebrow">Résumé</p>
+		<h1>Hayden Smith</h1>
+		<div class="actions">
+			<a class="btn btn-solid" href="/resume.pdf" target="_blank" rel="noopener">Open the PDF</a>
+			<a class="btn" href="/resume.pdf" download="Hayden-Smith-Resume.pdf">Download</a>
+		</div>
+	</section>
+
+	<section class="wrap-wide viewer">
+		<object data="/resume.pdf" type="application/pdf" aria-label="Résumé of Hayden Smith">
+			<div class="fallback">
+				<p>Your browser can't display the PDF inline.</p>
+				<a class="btn btn-solid" href="/resume.pdf" download="Hayden-Smith-Resume.pdf">Download the résumé</a>
+			</div>
+		</object>
+	</section>
+</BaseLayout>
+
+<style>
+	.intro {
+		padding-block: 1rem 1.5rem;
+	}
+
+	.eyebrow {
+		margin: 1.5rem 0 1rem;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+		margin-top: 1.5rem;
+	}
+
+	.viewer {
+		padding-block: 1rem 3rem;
+	}
+
+	.viewer object {
+		display: block;
+		width: 100%;
+		height: min(84vh, 1100px);
+		border: 1px solid var(--line);
+		background: var(--bg);
+	}
+
+	.fallback {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 2rem;
+	}
+
+	.fallback p {
+		margin: 0;
+	}
+
+	@media (max-width: 780px) {
+		.viewer object {
+			height: 70vh;
+		}
+	}
+</style>
